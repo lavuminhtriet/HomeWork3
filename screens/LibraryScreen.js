@@ -4,14 +4,14 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from "react
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { useAudio } from '../context/AudioProvider'; // 💡 Import useAudio
+import { useAudio } from '../context/AudioProvider'; 
 
 export default function LibraryScreen() {
   const navigation = useNavigation();
-  // 💡 Lấy danh sách playlists và hàm tạo playlist
+  // Lấy danh sách playlists và hàm tạo playlist
   const { playlists, createPlaylist } = useAudio();
 
-  // 💡 Hàm xử lý tạo playlist mới
+  // Hàm xử lý tạo playlist mới
   const handleCreatePlaylist = () => {
     Alert.prompt(
       "Playlist Mới",
@@ -31,11 +31,11 @@ export default function LibraryScreen() {
     );
   };
 
-  // 💡 Hàm render mỗi mục playlist
+  //Hàm render mỗi mục playlist
   const renderPlaylistItem = ({ item }) => (
     <TouchableOpacity 
       style={styles.menuItem}
-      // 💡 Điều hướng đến màn hình chi tiết
+      //Điều hướng đến màn hình chi tiết
       onPress={() => navigation.navigate('PlaylistDetail', { playlistId: item.id })}
     >
       <Icon name="musical-notes-outline" size={26} color="#333" style={styles.icon} />
@@ -48,7 +48,7 @@ export default function LibraryScreen() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerTitle}>Thư viện</Text>
       
-      {/* Nút Bài hát Yêu thích (Giữ nguyên) */}
+      
       <TouchableOpacity 
         style={styles.menuItem}
         onPress={() => navigation.navigate('FavoriteSongs')}
@@ -57,7 +57,7 @@ export default function LibraryScreen() {
         <Text style={styles.menuText}>Bài hát Yêu thích</Text>
       </TouchableOpacity>
       
-      {/* 💡 Nút tạo Playlist mới (FR-3.2) */}
+      
       <TouchableOpacity 
         style={styles.menuItem}
         onPress={handleCreatePlaylist}
@@ -66,7 +66,7 @@ export default function LibraryScreen() {
         <Text style={styles.menuText}>Tạo playlist mới</Text>
       </TouchableOpacity>
 
-      {/* 💡 Danh sách các playlist đã tạo (FR-3.4) */}
+      
       <FlatList
         data={playlists}
         keyExtractor={(item) => item.id}

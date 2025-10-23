@@ -1,26 +1,27 @@
-// screens/PlaylistDetailScreen.js
+
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAudio } from '../context/AudioProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useRoute } from '@react-navigation/native'; // 💡 Import hook để lấy params
+import { useRoute } from '@react-navigation/native'; 
 
 export default function PlaylistDetailScreen() {
-  const route = useRoute(); // Hook để lấy dữ liệu được truyền qua
+  const route = useRoute(); 
   const { playlistId } = route.params; // Lấy ID của playlist
   
   const { playlists, playSong, currentSong } = useAudio();
   const [playlist, setPlaylist] = useState(null); // State cho playlist cụ thể
 
-  // 💡 Tìm playlist dựa trên ID
+  // Tìm playlist dựa trên ID
   useEffect(() => {
     const foundPlaylist = playlists.find(p => p.id === playlistId);
     setPlaylist(foundPlaylist);
   }, [playlistId, playlists]); // Cập nhật khi playlists thay đổi
 
   const handleSongPress = (song) => {
-    // Phát bài hát VÀ truyền danh sách bài hát của playlist này
+    // Phát bài hát và truyền danh sách bài hát của playlist này
     if (playlist && playlist.songs.length > 0) {
       playSong(song, playlist.songs);
     }
@@ -49,7 +50,7 @@ export default function PlaylistDetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Tiêu đề là tên của Playlist */}
+      
       <Text style={styles.headerTitle}>{playlist.name}</Text>
       
       <FlatList
@@ -62,7 +63,7 @@ export default function PlaylistDetailScreen() {
   );
 }
 
-// (Sử dụng styles tương tự FavoriteSongsScreen)
+
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   headerTitle: {

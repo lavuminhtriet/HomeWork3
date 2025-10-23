@@ -176,12 +176,10 @@ export default function HomeScreen() {
 
   //Xử lý khi nhấn vào bài hát 
   const handleSongPress = (song) => {
-    // Luôn truyền 'songsData' (danh sách GỐC) để Next/Previous
-    // hoạt động trên toàn bộ danh sách, ngay cả khi đang tìm kiếm.
     playSong(song, songsData); 
   };
 
-  // Nhóm dữ liệu cho SectionList (FR-6.4)
+  // Nhóm dữ liệu cho SectionList 
   const getGroupedData = () => {
     // Nhóm các bài hát từ state 'songs' (đã lọc)
     const grouped = songs.reduce((acc, song) => {
@@ -217,8 +215,6 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <CustomHeader />
       <CategoriesList />
-
-      {/* Ô tìm kiếm */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -228,7 +224,6 @@ export default function HomeScreen() {
         />
       </View>
 
-      {/*NÂNG CẤP: Dùng SectionList (FR-6.4) */}
       <SectionList
         sections={formattedData} // Dùng dữ liệu đã nhóm
         keyExtractor={(item) => item.id}

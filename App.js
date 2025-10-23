@@ -1,26 +1,23 @@
-// App.js
-import { View } from "react-native"; // 💡 Import View
+
+import { View } from "react-native"; 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 
-// 💡 Import các màn hình và stack
+//Import các màn hình và stack
 import HomeStack from "./navigation/HomeStack";
 import ShortsScreen from "./screens/ShortsScreen";
 import ExploreScreen from "./screens/ExploreScreen";
 import LibraryStack from './navigation/LibraryStack';
 
-// 💡 Import Provider, Ref, và Component mới
+// Import Provider, Ref, và Component mới
 import { AudioProvider, useAudio } from './context/AudioProvider';
-import { navigationRef } from './navigation/NavigationRef'; // 💡 Import ref
-import MiniPlayer from './components/MiniPlayer'; // 💡 Import MiniPlayer
+import { navigationRef } from './navigation/NavigationRef'; 
+import MiniPlayer from './components/MiniPlayer'; 
 
 const Tab = createBottomTabNavigator();
 
-/**
- * Component Tab Navigator
- * Chúng ta tách ra để MainApp có thể render nó và MiniPlayer
- */
+
 function TabNavigator() {
   return (
     <Tab.Navigator
@@ -36,7 +33,7 @@ function TabNavigator() {
         },
         tabBarActiveTintColor: "red",
         tabBarInactiveTintColor: "gray",
-        // 💡 Ẩn tab bar khi vào màn hình Player (cho đẹp hơn)
+        // Ẩn tab bar khi vào màn hình Player
         tabBarStyle: ((route) => {
             const routeName = route.state?.routes[route.state.index]?.name;
             if (routeName === 'Player') {
@@ -54,20 +51,17 @@ function TabNavigator() {
   );
 }
 
-/**
- * Component MainApp
- * Đã nằm trong AudioProvider nên có thể dùng hook useAudio()
- */
+
 function MainApp() {
-  const { currentSong } = useAudio(); // 💡 Lấy currentSong
+  const { currentSong } = useAudio(); 
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Tab Navigator chiếm toàn bộ không gian */}
+      
       <TabNavigator />
       
-      {/* 💡 Render MiniPlayer có điều kiện */}
-      {/* Nếu có currentSong, MiniPlayer sẽ tự động hiện lên */}
+
+      
       {currentSong && <MiniPlayer />}
     </View>
   );
@@ -78,7 +72,7 @@ function MainApp() {
 export default function App() {
   return (
     <AudioProvider>
-      <NavigationContainer ref={navigationRef}> {/* 💡 Gắn ref vào đây */}
+      <NavigationContainer ref={navigationRef}> 
         <MainApp />
       </NavigationContainer>
     </AudioProvider>
